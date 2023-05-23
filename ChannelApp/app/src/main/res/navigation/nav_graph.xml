@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/channelFragment3">
+
+    <fragment
+        android:id="@+id/newChannelFragment"
+        android:name="com.perezperez.channelapp.ui.newchannel.NewChannelFragment"
+        android:label="NewChannelFragment" />
+    <fragment
+        android:id="@+id/channelsFragment"
+        android:name="com.perezperez.channelapp.ui.channel.channels.ChannelsFragment"
+        android:label="fragment_channels"
+        tools:layout="@layout/fragment_channels" >
+        <action
+            android:id="@+id/action_channelsFragment_to_newChannelFragment"
+            app:destination="@id/newChannelFragment" />
+        <action
+            android:id="@+id/action_channelsFragment_to_channelFragment3"
+            app:destination="@id/channelFragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/channelFragment3"
+        android:name="com.perezperez.channelapp.ui.ChannelFragment"
+        android:label="ChannelFragment" />
+</navigation>

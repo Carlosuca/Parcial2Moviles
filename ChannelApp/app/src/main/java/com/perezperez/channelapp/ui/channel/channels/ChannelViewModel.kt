@@ -1,5 +1,6 @@
 package com.perezperez.channelapp.ui.channel.channels
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
 import androidx.lifecycle.viewmodel.initializer
@@ -10,8 +11,9 @@ import com.perezperez.channelapp.repositories.ChannelRepository
 
 class ChannelViewModel(private val repository: ChannelRepository): ViewModel() {
 
-    var name = MutableListData("")
-    var content = MutableListData("")
+    var name = MutableLiveData("")
+    var content = MutableLiveData("")
+    var status = MutableLiveData("")
 
     fun createChannel() {
         if(!validateData()){
@@ -39,7 +41,7 @@ class ChannelViewModel(private val repository: ChannelRepository): ViewModel() {
     fun clearStatus(){
         status.value = INACTIVE
     }
-    
+
 
     private fun validateData(): Boolean {
         when{
@@ -67,7 +69,6 @@ class ChannelViewModel(private val repository: ChannelRepository): ViewModel() {
                 ChannelViewModel(app.channelRepository)
             }
         }
-
         const val CHANNEL_CRATED = "Channel Created"
         const val WRONG_INFORMATION = "Wrong information"
         const val INACTIVE = ""
