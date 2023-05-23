@@ -12,12 +12,13 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.perezperez.channelapp.R
 import com.perezperez.channelapp.databinding.FragmentChannelsBinding
+import com.perezperez.channelapp.databinding.FragmentNewChannelBinding
 import com.perezperez.channelapp.ui.channel.channels.ChannelViewModel
 
 
 class NewChannelFragment : Fragment() {
 
-    private lateinit var binding: FragmentChannelsBinding
+    private lateinit var binding: FragmentNewChannelBinding
 
     private val viewModel: ChannelViewModel by activityViewModels{
         ChannelViewModel.Factory
@@ -36,12 +37,15 @@ class NewChannelFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        binding = FragmentNewChannelBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         setViewModel()
         observeStatus()
-
-        binding = FragmentChannelsBinding.inflate(inflater, container, false)
-
-        return binding.root
     }
 
 

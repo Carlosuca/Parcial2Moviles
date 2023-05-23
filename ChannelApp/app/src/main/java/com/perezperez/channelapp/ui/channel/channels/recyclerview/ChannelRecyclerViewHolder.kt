@@ -7,12 +7,12 @@ import com.perezperez.channelapp.databinding.ChannelItemBinding
 
 class ChannelRecyclerViewHolder(private val binding: ChannelItemBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(nationalTeam: ChannelModel, clickListener: (ChannelModel) -> Unit) {
+    fun bind(channel: ChannelModel, clickListener: (ChannelModel) -> Unit) {
         binding.nameTeamTextView.text = channel.name
         binding.rankingTeamTextView.text = channel.content
 
         binding.cardNationalTeam.setOnClickListener {
-            clickListener(nationalTeam)
+            clickListener(channel)
         }
     }
 

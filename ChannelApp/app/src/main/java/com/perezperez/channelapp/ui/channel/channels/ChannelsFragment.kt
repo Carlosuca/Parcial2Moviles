@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.perezperez.channelapp.R
+import com.perezperez.channelapp.data.model.ChannelModel
 import com.perezperez.channelapp.databinding.FragmentChannelsBinding
 import com.perezperez.channelapp.ui.channel.channels.recyclerview.ChannelRecyclerViewAdapter
 
@@ -37,15 +39,35 @@ class ChannelsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        return inflater.inflate(R.layout.fragment_channels, container, false)
+        binding = FragmentChannelsBinding.inflate(inflater, container, false)
+
+        return binding.root
     }
 
-        private fun showSelectedItem(channel: ChannelViewModel) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setRecyclerView(view)
+        bind(view)
+
+        buttonAddMovie.setOnClickListener {
+            it.findNavController().navigate(R.id.action_channelsFragment_to_newChannelFragment)
+        }
+    }
+
+        private fun showSelectedItem(channel: ChannelModel) {
         viewModel.setSelectedChannel(channel)
         findNavController().navigate(R.id.action_channelsFragment_to_channelFragment3)
     }
 
-    private fun displaChannel() {
+    fun bind(view: View) {
+
+        buttonAddMovie = view.findViewById(R.id.action_toCreat_movie)
+        //nationalTeamCardView = view.findViewById(R.id.card_nationalTeam)
+
+    }
+
+    private fun displayChannel() {
         adapter.setData(viewModel.getChannel())
         adapter.notifyDataSetChanged()
     }
@@ -53,11 +75,13 @@ class ChannelsFragment : Fragment() {
     private fun setRecyclerView(view: View ){
         binding.recyclerView.layoutManager = LinearLayoutManager(view.context)
 
-        adapter = ChannelRecyclerViewAdapter { selectedChannel ->
+        adapter = ChannelRecyclerViewAdapter (
+            clickListener = { selectedChannel ->
             showSelectedItem(selectedChannel)
         }
+        )
         binding.recyclerView.adapter = adapter
-        displaChannel()
+        displayChannel()
     }
 
 }
