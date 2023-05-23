@@ -8,5 +8,5 @@ class ChannelRepository(private val channels: MutableList<ChannelModel>) {
 
     fun addChannels(channel: ChannelModel) = channels.add(channel)
 
-    
+
 }
